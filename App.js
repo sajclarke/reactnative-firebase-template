@@ -11,7 +11,10 @@
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+
+
 
 function HomeScreen({ navigation }) {
   return (
@@ -39,15 +42,54 @@ function DetailsScreen({ navigation }) {
   );
 }
 
-const Stack = createStackNavigator();
+function TodoScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Todos</Text>
+    </View>
+  )
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+const RootStack = createStackNavigator();
+const HomeStack = createStackNavigator();
+
+
+const HomeGroup = () => (
+  <HomeStack.Navigator initialRouteName="Home">
+    <HomeStack.Screen name="Home" component={HomeScreen} />
+    <HomeStack.Screen name="Details" component={DetailsScreen} />
+  </HomeStack.Navigator>
+)
+
+const BottomTab = () => (
+  <Tab.Navigator>
+    <Tab.Screen name="Home" component={HomeGroup} />
+    <Tab.Screen name="Todos" component={TodoScreen} />
+    <Tab.Screen name="Settings" component={SettingsScreen} />
+  </Tab.Navigator>
+)
+
+
+
+
+
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
+      <RootStack.Navigator initialRouteName="Home">
+        <RootStack.Screen name="Home" component={BottomTab} />
+        {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 }
