@@ -12,8 +12,8 @@ This repo is an example template for quickly setting up react-native-cli includi
 ### Roadmap
 
 - [x] Configure react-native initial project (react-native init [projectname])
-- [ ] Setup react-navigation
-- [ ] Integrate react-native-firebase
+- [x] Setup react-navigation
+- [x] Integrate react-native-firebase
 - [ ] Example CRUD App
 - [ ] Integrate react-native-maps
 
