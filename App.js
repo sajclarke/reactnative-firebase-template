@@ -11,6 +11,7 @@
 import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -72,9 +73,33 @@ const HomeGroup = () => (
 
 const BottomTab = () => (
   <Tab.Navigator>
-    <Tab.Screen name="Home" component={HomeGroup} />
-    <Tab.Screen name="Todos" component={TodoScreen} />
-    <Tab.Screen name="Settings" component={SettingsScreen} />
+    <Tab.Screen
+      name="Home"
+      component={HomeGroup}
+      options={{
+        // tabBarLabel: 'Main',
+        tabBarIcon: ({ focused, color, size }) => {
+          return <Ionicons name="home" size={size} color={color} />;
+        },
+      }}
+    />
+    <Tab.Screen
+      name="Todos"
+      component={TodoScreen}
+      options={{
+        tabBarLabel: 'Tasks',
+        tabBarIcon: ({ focused, color, size }) => {
+          return <Ionicons name="checkmark-circle-outline" size={size} color={color} />;
+        },
+      }}
+    />
+    <Tab.Screen name="Settings" component={SettingsScreen}
+      options={{
+        // tabBarLabel: 'Main',
+        tabBarIcon: ({ focused, color, size }) => {
+          return <Ionicons name="settings-outline" size={size} color={color} />;
+        },
+      }} />
   </Tab.Navigator>
 )
 
