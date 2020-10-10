@@ -1190,6 +1190,13 @@
     react-is "^16.13.0"
     use-subscription "^1.4.0"
 
+"@react-navigation/material-top-tabs@^5.2.19":
+  version "5.2.19"
+  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-5.2.19.tgz#ae40903263da715ae01b22400ddb1941e0f0d2f6"
+  integrity sha512-OiLdteZvXMvdRHNfUQ05zjH33Z0ceHW6aEs5E3v3v+o4oqX4lFH7Ctm9IgTEvnFUaUZnwJYT1XxXb+X4S9yV9w==
+  dependencies:
+    color "^3.1.2"
+
 "@react-navigation/native@^5.7.6":
   version "5.7.6"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.7.6.tgz#47546c512488d0e9c343219af635e1a44881761d"
@@ -5763,6 +5770,11 @@ react-native-screens@^2.11.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.11.0.tgz#34b30b07c2d04aa100cba984b944b303bfa43ea6"
   integrity sha512-vJzJE3zI1XUtqthrX3Dh2TBQWB+xFyaGhF52KBq9FjJUN5ws4xpLZJxBWa1KbGV3DilmcSZ4jmZR5LGordwE7w==
+
+react-native-tab-view@^2.15.2:
+  version "2.15.2"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.15.2.tgz#4bc7832d33a119306614efee667509672a7ee64e"
+  integrity sha512-2hxLkBnZtEKFDyfvNO5EUywhy3f/EiLOBO8SWqKj4BMBTO0QwnybaPE5MVF00Fhz+VA4+h/iI40Dkrrtq70dGg==
 
 react-native-vector-icons@^7.1.0:
   version "7.1.0"

@@ -12,6 +12,7 @@ import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -51,6 +52,14 @@ function TodoScreen() {
   )
 }
 
+function MapScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Map</Text>
+    </View>
+  )
+}
+
 function SettingsScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -63,10 +72,19 @@ const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
 const HomeStack = createStackNavigator();
 
+const HomeTabNav = createMaterialTopTabNavigator()
+
+const HomeTabs = () => (
+  <HomeTabNav.Navigator>
+    <HomeTabNav.Screen name="Home" component={HomeScreen} />
+    <HomeTabNav.Screen name="Map" component={MapScreen} />
+  </HomeTabNav.Navigator>
+)
+
 
 const HomeGroup = () => (
   <HomeStack.Navigator initialRouteName="Home">
-    <HomeStack.Screen name="Home" component={HomeScreen} />
+    <HomeStack.Screen name="Home" component={HomeTabs} />
     <HomeStack.Screen name="Details" component={DetailsScreen} />
   </HomeStack.Navigator>
 )
