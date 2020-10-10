@@ -16,7 +16,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
-
+import TodoScreen from './src/screens/Todos'
 
 function HomeScreen({ navigation }) {
   return (
@@ -44,13 +44,13 @@ function DetailsScreen({ navigation }) {
   );
 }
 
-function TodoScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Todos</Text>
-    </View>
-  )
-}
+// function TodoScreen() {
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Text>Todos</Text>
+//     </View>
+//   )
+// }
 
 function MapScreen() {
   return (
