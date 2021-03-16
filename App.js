@@ -9,30 +9,45 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import {View} from 'react-native';
+import {
+  Provider as PaperProvider,
+  Avatar,
+  Button,
+  Card,
+  Title,
+  Paragraph,
+  Text,
+} from 'react-native-paper';
+import {NavigationContainer} from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import TodoScreen from './src/screens/Todos'
+import TodoScreen from './src/screens/Todos';
 
-function HomeScreen({ navigation }) {
+function HomeScreen({navigation}) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>Home Screen</Text>
-      <Button
+      {/* <Button
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
-      />
+      /> */}
+      <Button
+        icon="camera"
+        mode="contained"
+        onPress={() => console.log('Pressed')}>
+        Press me
+      </Button>
     </View>
   );
 }
 
-function DetailsScreen({ navigation }) {
+function DetailsScreen({navigation}) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>Details Screen</Text>
       <Button
         title="Go to Details... again"
@@ -54,16 +69,34 @@ function DetailsScreen({ navigation }) {
 
 function MapScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>Map</Text>
     </View>
-  )
+  );
 }
 
 function SettingsScreen() {
+  const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
+    <View style={{padding: 10}}>
+      <Text style={{fontSize: 24}}>Settings!</Text>
+      <Card>
+        <Card.Title
+          title="Card Title"
+          subtitle="Card Subtitle"
+          left={LeftContent}
+        />
+        <Card.Content>
+          <Title>Card title</Title>
+          <Paragraph>Card content</Paragraph>
+        </Card.Content>
+        <Card.Cover source={{uri: 'https://picsum.photos/700'}} />
+        <Card.Actions>
+          <Button>Cancel</Button>
+          <Button>Ok</Button>
+        </Card.Actions>
+      </Card>
     </View>
   );
 }
@@ -72,22 +105,21 @@ const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
 const HomeStack = createStackNavigator();
 
-const HomeTabNav = createMaterialTopTabNavigator()
+const HomeTabNav = createMaterialTopTabNavigator();
 
 const HomeTabs = () => (
   <HomeTabNav.Navigator>
     <HomeTabNav.Screen name="Home" component={HomeScreen} />
     <HomeTabNav.Screen name="Map" component={MapScreen} />
   </HomeTabNav.Navigator>
-)
-
+);
 
 const HomeGroup = () => (
   <HomeStack.Navigator initialRouteName="Home">
     <HomeStack.Screen name="Home" component={HomeTabs} />
     <HomeStack.Screen name="Details" component={DetailsScreen} />
   </HomeStack.Navigator>
-)
+);
 
 const BottomTab = () => (
   <Tab.Navigator>
@@ -96,7 +128,7 @@ const BottomTab = () => (
       component={HomeGroup}
       options={{
         // tabBarLabel: 'Main',
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({focused, color, size}) => {
           return <Ionicons name="home" size={size} color={color} />;
         },
       }}
@@ -106,34 +138,40 @@ const BottomTab = () => (
       component={TodoScreen}
       options={{
         tabBarLabel: 'Tasks',
-        tabBarIcon: ({ focused, color, size }) => {
-          return <Ionicons name="checkmark-circle-outline" size={size} color={color} />;
+        tabBarIcon: ({focused, color, size}) => {
+          return (
+            <Ionicons
+              name="checkmark-circle-outline"
+              size={size}
+              color={color}
+            />
+          );
         },
       }}
     />
-    <Tab.Screen name="Settings" component={SettingsScreen}
+    <Tab.Screen
+      name="Settings"
+      component={SettingsScreen}
       options={{
         // tabBarLabel: 'Main',
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({focused, color, size}) => {
           return <Ionicons name="settings-outline" size={size} color={color} />;
         },
-      }} />
+      }}
+    />
   </Tab.Navigator>
-)
-
-
-
-
-
+);
 
 function App() {
   return (
-    <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Home">
-        <RootStack.Screen name="Home" component={BottomTab} />
-        {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
-      </RootStack.Navigator>
-    </NavigationContainer>
+    <PaperProvider>
+      <NavigationContainer>
+        <RootStack.Navigator initialRouteName="Home">
+          <RootStack.Screen name="Home" component={BottomTab} />
+          {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
+        </RootStack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
 
