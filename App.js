@@ -9,84 +9,41 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, Settings } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import TodoScreen from './src/screens/Todos'
+import HomeScreen from './src/screens/Home'
+import MapScreen from './src/screens/Map'
+import SettingScreen from './src/screens/Settings'
 
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-    </View>
-  );
-}
-
-function DetailsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
-
-// function TodoScreen() {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Text>Todos</Text>
-//     </View>
-//   )
-// }
-
-function MapScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Map</Text>
-    </View>
-  )
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
 const HomeStack = createStackNavigator();
-
-const HomeTabNav = createMaterialTopTabNavigator()
-
-const HomeTabs = () => (
-  <HomeTabNav.Navigator>
-    <HomeTabNav.Screen name="Home" component={HomeScreen} />
-    <HomeTabNav.Screen name="Map" component={MapScreen} />
-  </HomeTabNav.Navigator>
-)
+const MapStack = createStackNavigator();
+const SettingsStack = createStackNavigator();
 
 
 const HomeGroup = () => (
   <HomeStack.Navigator initialRouteName="Home">
-    <HomeStack.Screen name="Home" component={HomeTabs} />
-    <HomeStack.Screen name="Details" component={DetailsScreen} />
+    <HomeStack.Screen name="Home" component={HomeScreen} options={{headerTitleAlign: 'center'}}/>
   </HomeStack.Navigator>
+)
+
+const MapGroup = () => (
+  <MapStack.Navigator>
+    <MapStack.Screen name="Map" component={MapScreen} options={{headerTitleAlign: 'center'}}/>
+  </MapStack.Navigator>
+)
+
+const SettingsGroup = () => (
+  <SettingsStack.Navigator>
+    <SettingsStack.Screen name="Settings" component={SettingScreen} options={{headerTitleAlign: 'center'}}/>
+  </SettingsStack.Navigator>
 )
 
 const BottomTab = () => (
@@ -102,18 +59,20 @@ const BottomTab = () => (
       }}
     />
     <Tab.Screen
-      name="Todos"
-      component={TodoScreen}
+      name="Map"
+      component={MapGroup}
       options={{
-        tabBarLabel: 'Tasks',
+        tabBarLabel: 'Map', justifyContent: 1,
         tabBarIcon: ({ focused, color, size }) => {
-          return <Ionicons name="checkmark-circle-outline" size={size} color={color} />;
+          return <Ionicons name="navigate-circle-outline" size={size} color={color} />;
         },
       }}
     />
-    <Tab.Screen name="Settings" component={SettingsScreen}
+    <Tab.Screen 
+      name="Settings" 
+      component={SettingsGroup}
       options={{
-        // tabBarLabel: 'Main',
+        tabBarLabel: "Settings", justifyContent: 1,
         tabBarIcon: ({ focused, color, size }) => {
           return <Ionicons name="settings-outline" size={size} color={color} />;
         },
@@ -129,8 +88,9 @@ const BottomTab = () => (
 function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Home">
+      <RootStack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
         <RootStack.Screen name="Home" component={BottomTab} />
+        {/* <RootStack.Screen name="Settings" component={SettingsScreen}/> */}
         {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
       </RootStack.Navigator>
     </NavigationContainer>

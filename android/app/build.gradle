@@ -191,6 +191,14 @@ dependencies {
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
+    implementation 'com.google.firebase:firebase-core:16.0.8'
+
+    implementation "com.google.firebase:firebase-messaging:17.5.0"
+    
+    implementation 'com.google.firebase:firebase-analytics'
+
+    implementation project(':react-native-maps')
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }
@@ -222,3 +230,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
